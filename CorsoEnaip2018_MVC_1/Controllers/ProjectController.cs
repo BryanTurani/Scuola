@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CorsoEnaip2018_MVC_1.Controllers
 {
-    public class CarController : Controller
+    public class ProjectController : Controller
     {
         private readonly static List<Car> Models
             = new List<Car>
@@ -25,22 +25,6 @@ namespace CorsoEnaip2018_MVC_1.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            #region soluzione meno efficiente
-            // questo funziona ma è poco efficiente
-            // (sia Any che First scorrono tutta la lista
-            //     fino a trovare un match)
-            //if (Models.Any(x => x.Id == id))
-            //{
-            //    var model = Models.First(x => x.Id == id);
-
-            //    return View(model);
-            //}
-            //else
-            //{
-            //    return NotFound();
-            //}
-            #endregion
-
             var model = Models.FirstOrDefault(x => x.Id == id);
 
             if (model == null)
@@ -70,7 +54,45 @@ namespace CorsoEnaip2018_MVC_1.Controllers
 
             Models[index] = model;
 
-            return View("Index", Models);
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var model = Models.FirstOrDefault(x => x.Id == id);
+
+            if (model == null)
+                return NotFound();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(Car model)
+        {
+            // questo è più semplice da scrivere
+            // ma meno performante,
+            // inoltre non toglie un solo elemento, ma TUTTI gli elementi
+            // che rispettano la condizione.
+            // Models.RemoveAll(x => x.Id == model.Id);
+
+            // questo compie due iterazioni,
+            // una per trovare l'oggetto,
+            // e l'altra per rimuoverlo
+            //var toDelete = Models.FirstOrDefault(x => x.Id == model.Id);
+            //Models.Remove(toDelete);
+
+            // è il più performante:
+            // esegue una singola iterazione.
+            var index = Models.FindIndex(x => x.Id == model.Id);
+
+            if (index == -1)
+                return NotFound();
+
+            Models.RemoveAt(index);
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

@@ -1,0 +1,30 @@
+﻿@using CorsoEnaip2018_ProjectManagement.Models;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model Project
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Delete project</title>
+        <link rel="stylesheet" href="~/bootstrap.css" />
+    </head>
+
+    <body>
+        <div class="container text-center" style="width:500px;">
+            <h1>Delete project</h1>
+
+            <form method="post">
+                <div class="form-group">
+                    <p>The project '@Model.Name' for client '@Model.Client' will be deleted.<br>
+                    Are you sure to do this?</p>
+                </div>
+
+                <div class="form-group">
+                    <a href="/car/index" class="btn btn-default">Annulla</a>
+                    <input type="submit" class="btn btn-danger" value="Conferma Eliminazione" />
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

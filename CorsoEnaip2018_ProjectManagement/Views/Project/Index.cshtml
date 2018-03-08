@@ -1,0 +1,48 @@
+﻿@using CorsoEnaip2018_ProjectManagement.Models
+@model List<Project>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Projects list</title>
+        <link rel="stylesheet" href="~/bootstrap.css" />
+    </head>
+
+    <body>
+        <h1>Projects list</h1>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Client</th>
+                    <th>Manager</th>
+                    <th>Start date</th>
+                    <th>Finish date</th>
+                    <th>Delivery date</th>
+                    <th>Price</th>
+                    <th>Cost</th>
+                    <th colspan="2" />
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var project in Model)
+                {
+                    <tr>
+                        <td>@project.Name</td>
+                        <td>@project.Client</td>
+                        <td>@project.Manager</td>
+                        <td>@project.StartDate.ToString("dd-MM-yyyy")</td>
+                        <td>@project.FinishDate.ToString("dd-MM-yyyy")</td>
+                        <td>@project.DeliveryDate.ToString("dd-MM-yyyy")</td>
+                        <td>@project.Price</td>
+                        <td>@project.Cost</td>
+                        <td><a href="/project/edit/@(project.Id)" class="btn btn-primary">Edit</a></td>
+                        <td><a href="/project/delete/@(project.Id)" class="btn btn-danger">Delete</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </body>
+</html>
