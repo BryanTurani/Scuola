@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace CorsoEnaip2018_SuperHeroes.DataAccess
 {
-    interface IRepository<T>
+    public interface IRepository<T>
     {
         List<T> FindAll();
         T Find(int id);
-        void Update(T model);
+        bool Update(T model);
         void Insert(T model);
-        void Delete(T model);
+        bool Delete(T model);
     }
 }
