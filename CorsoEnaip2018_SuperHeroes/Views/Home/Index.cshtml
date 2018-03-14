@@ -1,14 +1,31 @@
 ﻿<a class="btn btn-primary" asp-controller="Home" asp-action="Edit">
-  Nuovo Supereroe
+    Nuovo Supereroe
 </a>
 <p>@TempData["Message"]</p>
-<ul>
-  @foreach(var sh in Model)
-  {
-      <li>
-        @sh.Name
-        <a asp-controller="Home" asp-action="Edit"
-           asp-route-id="@sh.Id">Modifica</a>
-      </li>
-  }
-</ul>
+<table>
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Forza</th>
+            <th>Può volare</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var sh in Model)
+        {
+            <tr>
+                <td>@sh.Name</td>
+                <td>@sh.Strength</td>
+                <td>@sh.CanFly</td>
+                <td>
+                    <a asp-controller="Home" asp-action="Edit"
+                    asp-route-id="@sh.Id">Modifica</a>
+                </td>
+                <td>
+                    <a asp-controller="Home" asp-action="Delete"
+                    asp-route-id="@sh.Id">Rimuovi</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
