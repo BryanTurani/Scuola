@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace CorsoEnaip2018_ProjectManagement_Prof
+namespace CorsoEnaip2018_ProjectManagement
 {
     public class Program
     {

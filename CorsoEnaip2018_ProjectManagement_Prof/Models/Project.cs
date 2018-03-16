@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CorsoEnaip2018_ProjectManagement_Prof.Models
+namespace CorsoEnaip2018_ProjectManagement.Models
 {
     public class Project
     {
