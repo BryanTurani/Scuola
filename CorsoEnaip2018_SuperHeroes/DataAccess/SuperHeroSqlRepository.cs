@@ -10,7 +10,7 @@ namespace CorsoEnaip2018_SuperHeroes.DataAccess
 {
     public class SuperHeroSqlRepository : IRepository<SuperHero>
     {
-        private const string CONNECTION_STRING = @"Data Source=TRISRV10\SQLEXPRESS; Initial Catalog=CorsoEuris_Bryan; Integrated Security=True";
+        private const string CONNECTION_STRING = @"Data Source=TRISRV10\SQLEXPRESS;Initial Catalog=CorsoEuris_Kraus;Integrated Security=True";
 
         public void Insert(SuperHero model)
         {
@@ -21,29 +21,28 @@ namespace CorsoEnaip2018_SuperHeroes.DataAccess
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandType = CommandType.Text;
-
                     cmd.CommandText =
                         " INSERT INTO SuperHeroes" +
-                        " ([Name], [SecretName], [Birth], [Strength], [CanFly], [KilledVillains])" +
+                        " ([Name],[SecretName],[Birth],[Strength],[CanFly],[KilledVillains]) " +
                         " VALUES" +
-                        " (@Name, @SecretName, @Birth, @Strength, @CanFly, @KilledVillains)";
+                        " (@Name,@SecretName,@Birth,@Strength,@CanFly,@KilledVillains)";
 
-                    // Quest'altra versione è equivalente:
-                    // cmd.Parameters.Add(new SqlParameter("Name", model.Name));
+                    cmd.Parameters.Add(new SqlParameter("Name", model.Name));
+                    // quest'altra versione è equivalente:
+                    //cmd.Parameters.AddWithValue("@Name", model.Name);
 
-                    cmd.Parameters.AddWithValue("@Name", model.Name);
-                    cmd.Parameters.AddWithValue("@SecretName", model.SecretName);
-                    cmd.Parameters.AddWithValue("@Birth", model.Birth);
-                    cmd.Parameters.AddWithValue("@Strength", model.Strength);
-                    cmd.Parameters.AddWithValue("@CanFly", model.CanFly);
-                    cmd.Parameters.AddWithValue("@KilledVillains", model.KilledVillains);
+                    cmd.Parameters.Add(new SqlParameter("SecretName", model.SecretName));
+                    cmd.Parameters.Add(new SqlParameter("Birth", model.Birth));
+                    cmd.Parameters.Add(new SqlParameter("Strength", model.Strength));
+                    cmd.Parameters.Add(new SqlParameter("CanFly", model.CanFly));
+                    cmd.Parameters.Add(new SqlParameter("KilledVillains", model.KilledVillains));
 
                     cmd.ExecuteNonQuery();
                 }
             }
         }
 
-        public List<SuperHero> FindAll()
+        public bool Delete(SuperHero model)
         {
             using (var conn = new SqlConnection(CONNECTION_STRING))
             {
@@ -51,32 +50,18 @@ namespace CorsoEnaip2018_SuperHeroes.DataAccess
 
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = "SELECT * FROM SuperHeroes";
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText =
+                        "DELETE FROM SuperHeroes WHERE Id = @id";
 
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        var list = new List<SuperHero>();
+                    cmd.Parameters.Add(new SqlParameter("id", model.Id));
 
-                        while (reader.Read())
-                        {
-                            var sh = new SuperHero
-                            {
-                                Id = (int)reader[nameof(SuperHero.Id)],
-                                Name = (string)reader[nameof(SuperHero.Name)],
-                                SecretName = (string)reader[nameof(SuperHero.SecretName)],
-                                Birth = (DateTime)reader[nameof(SuperHero.Birth)],
-                                Strength = (int)reader[nameof(SuperHero.Strength)],
-                                CanFly = (bool)reader[nameof(SuperHero.CanFly)],
-                                KilledVillains = (int)reader[nameof(SuperHero.KilledVillains)]
-                            };
+                    var result = cmd.ExecuteNonQuery();
 
-                            list.Add(sh);
-                        }
-
-                        return list;
-                    }
+                    return result == 1;
                 }
             }
+
         }
 
         public SuperHero Find(int id)
@@ -114,7 +99,7 @@ namespace CorsoEnaip2018_SuperHeroes.DataAccess
             }
         }
 
-        public bool Delete(SuperHero model)
+        public List<SuperHero> FindAll()
         {
             using (var conn = new SqlConnection(CONNECTION_STRING))
             {
@@ -122,18 +107,32 @@ namespace CorsoEnaip2018_SuperHeroes.DataAccess
 
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = "SELECT * FROM SuperHeroes";
 
-                    cmd.CommandText =
-                        "DELETE FROM SuperHeroes WHERE Id = @id";
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        var list = new List<SuperHero>();
 
-                    cmd.Parameters.AddWithValue("Id", model.Id);
+                        while (reader.Read())
+                        {
+                            var sh = new SuperHero
+                            {
+                                Id = (int)reader[nameof(SuperHero.Id)],
+                                Name = (string)reader[nameof(SuperHero.Name)],
+                                SecretName = (string)reader[nameof(SuperHero.SecretName)],
+                                Birth = (DateTime)reader[nameof(SuperHero.Birth)],
+                                Strength = (int)reader[nameof(SuperHero.Strength)],
+                                CanFly = (bool)reader[nameof(SuperHero.CanFly)],
+                                KilledVillains = (int)reader[nameof(SuperHero.KilledVillains)]
+                            };
 
-                    var result = cmd.ExecuteNonQuery();
+                            list.Add(sh);
+                        }
 
-                    return result == 1;
+                        return list;
+                    }
                 }
-            }
+            }      
         }
 
         public bool Update(SuperHero model)
@@ -145,24 +144,23 @@ namespace CorsoEnaip2018_SuperHeroes.DataAccess
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandType = CommandType.Text;
-
                     cmd.CommandText =
                         " UPDATE SuperHeroes SET" +
-                        " [Name] = @name, " +
-                        " [SecretName] = @secretname, " +
-                        " [Birth] = @birth, " +
-                        " [Strength] = @strength, " +
-                        " [CanFly] = @canfly, " +
+                        " [Name] = @name," +
+                        " [SecretName] = @secretname," +
+                        " [Birth] = @birth," +
+                        " [Strength] = @strength," +
+                        " [CanFly] = @canfly," +
                         " [KilledVillains] = @killedvillains" +
                         " WHERE Id = @id";
 
-                    cmd.Parameters.AddWithValue("@id", model.Id);
-                    cmd.Parameters.AddWithValue("@name", model.Name);
-                    cmd.Parameters.AddWithValue("@secretname", model.SecretName);
-                    cmd.Parameters.AddWithValue("@birth", model.Birth);
-                    cmd.Parameters.AddWithValue("@strength", model.Strength);
-                    cmd.Parameters.AddWithValue("@canfly", model.CanFly);
-                    cmd.Parameters.AddWithValue("@killedvillains", model.KilledVillains);
+                    cmd.Parameters.Add(new SqlParameter("name", model.Name));
+                    cmd.Parameters.Add(new SqlParameter("secretname", model.SecretName));
+                    cmd.Parameters.Add(new SqlParameter("birth", model.Birth));
+                    cmd.Parameters.Add(new SqlParameter("strength", model.Strength));
+                    cmd.Parameters.Add(new SqlParameter("canfly", model.CanFly));
+                    cmd.Parameters.Add(new SqlParameter("killedvillains", model.KilledVillains));
+                    cmd.Parameters.Add(new SqlParameter("id", model.Id));
 
                     var result = cmd.ExecuteNonQuery();
 
