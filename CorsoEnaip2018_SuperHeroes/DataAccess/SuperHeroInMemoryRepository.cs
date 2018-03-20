@@ -47,9 +47,9 @@ namespace CorsoEnaip2018_SuperHeroes.DataAccess
         {
             var index = _models.FindIndex(x => x.Id == model.Id);
 
-            // posso controllare le condizioni e restituire il risultato
+            // Posso controllare le condizioni e restituire il risultato
             // in due modi diversi.
-            // questo è il primo:
+            // Questo è il primo:
             var isIndexValid = index > -1;
 
             if (isIndexValid)
@@ -58,13 +58,13 @@ namespace CorsoEnaip2018_SuperHeroes.DataAccess
             return isIndexValid;
 
 
-            // questo è il secondo:
-            //if (index == -1)
-            //    return false;
+            // Questo è il secondo:
+            // if (index == -1)
+            //     return false;
 
-            //_models[index] = model;
+            // _models[index] = model;
 
-            //return true;
+            // return true;
         }
     }
 }

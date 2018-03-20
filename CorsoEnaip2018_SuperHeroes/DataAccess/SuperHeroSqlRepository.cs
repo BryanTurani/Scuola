@@ -10,7 +10,7 @@ namespace CorsoEnaip2018_SuperHeroes.DataAccess
 {
     public class SuperHeroSqlRepository : IRepository<SuperHero>
     {
-        private const string CONNECTION_STRING = @"Data Source=TRISRV10\SQLEXPRESS;Initial Catalog=CorsoEuris_Kraus;Integrated Security=True";
+        private const string CONNECTION_STRING = @"Data Source=TRISRV10\SQLEXPRESS; Initial Catalog=CorsoEuris_Bryan; Integrated Security=True";
 
         public void Insert(SuperHero model)
         {
@@ -23,13 +23,13 @@ namespace CorsoEnaip2018_SuperHeroes.DataAccess
                     cmd.CommandType = CommandType.Text;
                     cmd.CommandText =
                         " INSERT INTO SuperHeroes" +
-                        " ([Name],[SecretName],[Birth],[Strength],[CanFly],[KilledVillains]) " +
+                        " ([Name], [SecretName], [Birth], [Strength], [CanFly], [KilledVillains]) " +
                         " VALUES" +
-                        " (@Name,@SecretName,@Birth,@Strength,@CanFly,@KilledVillains)";
+                        " (@Name, @SecretName, @Birth, @Strength, @CanFly, @KilledVillains)";
 
                     cmd.Parameters.Add(new SqlParameter("Name", model.Name));
-                    // quest'altra versione è equivalente:
-                    //cmd.Parameters.AddWithValue("@Name", model.Name);
+                    // Quest'altra versione è equivalente:
+                    // cmd.Parameters.AddWithValue("@Name", model.Name);
 
                     cmd.Parameters.Add(new SqlParameter("SecretName", model.SecretName));
                     cmd.Parameters.Add(new SqlParameter("Birth", model.Birth));
