@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using CorsoEnaip2018_ProjectManagement.DataAccess;
+using CorsoEnaip2018_ProjectManagement.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using System.Globalization;
 
 namespace CorsoEnaip2018_ProjectManagement
 {
@@ -14,10 +12,18 @@ namespace CorsoEnaip2018_ProjectManagement
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddSingleton<
+                IRepository<Project>,
+                SqlProjectRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            var ci = new CultureInfo("en-US");
+
+            CultureInfo.DefaultThreadCurrentCulture = ci;
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -31,24 +37,29 @@ namespace CorsoEnaip2018_ProjectManagement
                     "default",
                     "{controller=Project}/{action=Index}/{id?}");
             });
-
-            /* Gestione progetti di un'azienda
-             * Ogni progetto ha:
-             * 
-             * Nome - stringa
-             * Cliente - stringa
-             * Manager - stringa
-             * DataInizio - data
-             * DataFine - data
-             * DataConsegna - data
-             * Prezzo - decimal
-             * Costo - decimal
-             * 
-             * Pagine:
-             *   - Lista di progetti,
-             *   - Modifica pogetto,
-             *   - Eliminazione progetto
-             */
         }
+
+        /*
+         * ProjectManagement
+         * 
+         * Gestione progetti di un'azienda.
+         * Ogni progetto ha:
+         * Nome - stringa
+         * Cliente - stringa
+         * Manager - stringa
+         * DataInizio - data    <-- data in cui inizia il progetto
+         * DataFine - data      <-- data in cui lo si finisce
+         * DataConsegna - data   <-- data promessa al cliente
+         * Prezzo - decimal <-- è il prezzo che pagherà il cliente
+         * Costo - decimal  <-- il costo degli sviluppatori
+         * 
+         * Pagine:
+         *  lista di progetti,
+         *  modifica progetto,
+         *  eliminazione progetto
+         * 
+         * 
+         * 
+         */
     }
 }

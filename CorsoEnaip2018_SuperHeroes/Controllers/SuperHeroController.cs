@@ -97,6 +97,5 @@ namespace CorsoEnaip2018_SuperHeroes.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-
     }
 }

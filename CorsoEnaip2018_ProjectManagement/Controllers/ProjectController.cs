@@ -1,4 +1,5 @@
-﻿using CorsoEnaip2018_ProjectManagement.Models;
+﻿using CorsoEnaip2018_ProjectManagement.DataAccess;
+using CorsoEnaip2018_ProjectManagement.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,23 +10,24 @@ namespace CorsoEnaip2018_ProjectManagement.Controllers
 {
     public class ProjectController : Controller
     {
-        private readonly static List<Project> Models
-            = new List<Project>
-            {
-                new Project(1, "Bryan", "Carlotta", "Massimiliano", 2005, 01, 01, 2006, 12, 31, 2006, 01, 01, 200000, 250000),
-                new Project(2, "Marzio", "Marzia", "Massimiliano", 2005, 01, 01, 2006, 12, 31, 2006, 01, 01, 100000, 120000),
-                new Project(3, "Andrea", "Nicole", "Massimiliano", 2005, 01, 01, 2006, 12, 31, 2006, 01, 01, 50000, 70000),
-            };
+        private IRepository<Project> _repository;
 
-        public ViewResult Index()
+        public ProjectController(IRepository<Project> repository)
         {
-            return View(Models);
+            _repository = repository;
+        }
+
+        public IActionResult Index()
+        {
+            var models = _repository.FindAll();
+
+            return View(models);
         }
 
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var model = Models.FirstOrDefault(x => x.Id == id);
+            var model = _repository.Find(id);
 
             if (model == null)
                 return NotFound();
@@ -36,12 +38,10 @@ namespace CorsoEnaip2018_ProjectManagement.Controllers
         [HttpPost]
         public IActionResult Edit(Project model)
         {
-            var index = Models.FindIndex(x => x.Id == model.Id);
+            var result = _repository.Update(model);
 
-            if (index == -1)
+            if (!result)
                 return NotFound();
-
-            Models[index] = model;
 
             return RedirectToAction(nameof(Index));
         }
@@ -49,7 +49,7 @@ namespace CorsoEnaip2018_ProjectManagement.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            var model = Models.FirstOrDefault(x => x.Id == id);
+            var model = _repository.Find(id);
 
             if (model == null)
                 return NotFound();
@@ -60,12 +60,10 @@ namespace CorsoEnaip2018_ProjectManagement.Controllers
         [HttpPost]
         public IActionResult Delete(Project model)
         {
-            var index = Models.FindIndex(x => x.Id == model.Id);
+            var result = _repository.Delete(model);
 
-            if (index == -1)
+            if (!result)
                 return NotFound();
-
-            Models.RemoveAt(index);
 
             return RedirectToAction(nameof(Index));
         }

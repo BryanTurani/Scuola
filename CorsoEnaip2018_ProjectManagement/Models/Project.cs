@@ -2,36 +2,46 @@
 
 namespace CorsoEnaip2018_ProjectManagement.Models
 {
+    // Invece di SqlReader e SqlCommand, usare EntityFramework
+    // Per l'Index di Project, creare un ViewModel solo con i dati necessari
+    // A scelta, Customer o Manager devono essere entità esterne
+    // Collegate da una relazione uno-a-molti (foreign-key) con la classe Project.
+    // Sulla View di Edit, usare un 'select' per selezionare Customer/Manager.
+
     public class Project
     {
         public Project() { }
 
         public Project(
-            int id,  string name, string client, string manager,
-            int dayStart, int monthStart, int yearStart,
-            int dayFinish, int monthFinish, int yearFinish,
-            int dayDelivery, int monthDelivery, int yearDelivery,
-            decimal price, decimal cost)
+            int id,
+            string name,
+            string customer,
+            string manager,
+            DateTime startDate,
+            DateTime endDate,
+            DateTime deliveryDate,
+            decimal price,
+            decimal cost)
         {
             Id = id;
             Name = name;
-            Client = client;
+            Customer = customer;
             Manager = manager;
-            StartDate = new DateTime(dayStart, monthStart, yearStart);
-            FinishDate = new DateTime(dayFinish, monthFinish, yearFinish);
-            DeliveryDate = new DateTime(dayDelivery, monthDelivery, yearDelivery);
+            StartDate = startDate;
+            EndDate = endDate;
+            DeliveryDate = deliveryDate;
             Price = price;
             Cost = cost;
         }
 
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Client { get; set; }
+        public string Customer { get; set; }
         public string Manager { get; set; }
         public DateTime StartDate { get; set; }
-        public DateTime FinishDate { get; set; }
+        public DateTime EndDate { get; set; }
         public DateTime DeliveryDate { get; set; }
         public decimal Price { get; set; }
         public decimal Cost { get; set; }
-}
+    }
 }
