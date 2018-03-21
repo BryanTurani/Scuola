@@ -10,7 +10,7 @@ namespace CorsoEnaip2018_SuperHeroes.DataAccess
 {
     public class SuperHeroSqlRepository : IRepository<SuperHero>
     {
-        private const string CONNECTION_STRING = @"Data Source=TRISRV10\SQLEXPRESS; Initial Catalog=CorsoEuris_Bryan; Integrated Security=True";
+        private const string CONNECTION_STRING = @"Data Source=TRISRV10\SQLEXPRESS;Initial Catalog=CorsoEuris_Bryan;Integrated Security=True";
 
         public void Insert(SuperHero model)
         {
@@ -23,19 +23,19 @@ namespace CorsoEnaip2018_SuperHeroes.DataAccess
                     cmd.CommandType = CommandType.Text;
                     cmd.CommandText =
                         " INSERT INTO SuperHeroes" +
-                        " ([Name], [SecretName], [Birth], [Strength], [CanFly], [KilledVillains]) " +
+                        " ([Name],[SecretName],[Birth],[Strength],[CanFly],[KilledVillains]) " +
                         " VALUES" +
-                        " (@Name, @SecretName, @Birth, @Strength, @CanFly, @KilledVillains)";
+                        " (@Name,@SecretName,@Birth,@Strength,@CanFly,@KilledVillains)";
 
                     cmd.Parameters.Add(new SqlParameter("Name", model.Name));
-                    // Quest'altra versione è equivalente:
-                    // cmd.Parameters.AddWithValue("@Name", model.Name);
+                    // quest'altra versione è equivalente:
+                    //cmd.Parameters.AddWithValue("@Name", model.Name);
 
                     cmd.Parameters.Add(new SqlParameter("SecretName", model.SecretName));
                     cmd.Parameters.Add(new SqlParameter("Birth", model.Birth));
                     cmd.Parameters.Add(new SqlParameter("Strength", model.Strength));
                     cmd.Parameters.Add(new SqlParameter("CanFly", model.CanFly));
-                    cmd.Parameters.Add(new SqlParameter("KilledVillains", model.KilledVillains));
+                    //cmd.Parameters.Add(new SqlParameter("KilledVillains", model.KilledVillains));
 
                     cmd.ExecuteNonQuery();
                 }
@@ -87,7 +87,7 @@ namespace CorsoEnaip2018_SuperHeroes.DataAccess
                                 Birth = (DateTime)reader[nameof(SuperHero.Birth)],
                                 Strength = (int)reader[nameof(SuperHero.Strength)],
                                 CanFly = (bool)reader[nameof(SuperHero.CanFly)],
-                                KilledVillains = (int)reader[nameof(SuperHero.KilledVillains)]
+                                //KilledVillains = (int)reader[nameof(SuperHero.KilledVillains)]
                             };
                         }
                         else
@@ -123,7 +123,7 @@ namespace CorsoEnaip2018_SuperHeroes.DataAccess
                                 Birth = (DateTime)reader[nameof(SuperHero.Birth)],
                                 Strength = (int)reader[nameof(SuperHero.Strength)],
                                 CanFly = (bool)reader[nameof(SuperHero.CanFly)],
-                                KilledVillains = (int)reader[nameof(SuperHero.KilledVillains)]
+                                //KilledVillains = (int)reader[nameof(SuperHero.KilledVillains)]
                             };
 
                             list.Add(sh);
@@ -159,7 +159,7 @@ namespace CorsoEnaip2018_SuperHeroes.DataAccess
                     cmd.Parameters.Add(new SqlParameter("birth", model.Birth));
                     cmd.Parameters.Add(new SqlParameter("strength", model.Strength));
                     cmd.Parameters.Add(new SqlParameter("canfly", model.CanFly));
-                    cmd.Parameters.Add(new SqlParameter("killedvillains", model.KilledVillains));
+                    //cmd.Parameters.Add(new SqlParameter("killedvillains", model.KilledVillains));
                     cmd.Parameters.Add(new SqlParameter("id", model.Id));
 
                     var result = cmd.ExecuteNonQuery();
