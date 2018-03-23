@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -52,25 +52,27 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="CSS - fondamenti.pdf" />
-    <None Include="EmployeeTests.playlist" />
-    <None Include="provetta 26 gennaio.md" />
+    <None Include="Esercizi\provetta 26 gennaio.md" />
     <None Include="web projects - specifiche.docx" />
+    <None Include="Security - fundamentals.pdf" />
+    <None Include="CSS - fundamentals.pdf" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="DatabaseCorso.sql" />
     <Content Include="Design Pattern fatti.txt" />
-    <Content Include="Esercizi - Arena.txt" />
-    <Content Include="Esercizi - cup.txt" />
-    <Content Include="Esercizi - Employee.txt" />
-    <Content Include="Esercizi - gioco degli scacchi.txt" />
-    <Content Include="Esercizi - salvataggio su file.txt" />
-    <Content Include="Esercizi - Template - sales 2.txt" />
-    <Content Include="Esercizi - template - sales.txt" />
-    <Content Include="Esercizi - Visitor.txt" />
-    <Content Include="Preparazione provetta 26 gennaio.txt" />
-    <Content Include="provetta 12 febbraio.txt" />
+    <Content Include="Esercizi\Esercizi - Arena.txt" />
+    <Content Include="Esercizi\Esercizi - cup.txt" />
+    <Content Include="Esercizi\Esercizi - Employee.txt" />
+    <Content Include="Esercizi\Esercizi - gioco degli scacchi.txt" />
+    <Content Include="Esercizi\Esercizi - salvataggio su file.txt" />
+    <Content Include="Esercizi\Esercizi - Template - sales 2.txt" />
+    <Content Include="Esercizi\Esercizi - Template - sales.txt" />
+    <Content Include="Esercizi\Esercizi - Visitor.txt" />
+    <Content Include="Esercizi\Preparazione provetta 26 gennaio.txt" />
+    <Content Include="Esercizi\provetta 12 febbraio.txt" />
+    <Content Include="Risorse - link utili.txt" />
     <Content Include="SOLID.txt" />
-    <Content Include="Template - tubes.txt" />
+    <Content Include="Esercizi\Esercizi - Template - tubes.txt" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
