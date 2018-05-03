@@ -1,0 +1,26 @@
+﻿@model List<Item>
+
+@{ }
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Value</th>
+            <th>Created</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var i in Model)
+        {
+            <tr>
+                <td>@i.Name</td>
+                <td>@i.Value.ToString("#,##0.##")</td>
+                <td>@i.Created.ToString("dd-MM-yyyy")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="/home/index" class="btn">Button 1</a>
+<a href="/home/index" class="btn">Button 2</a>
