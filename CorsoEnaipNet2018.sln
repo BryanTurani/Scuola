@@ -182,13 +182,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CorsoEnaip2018_AspNetCoreTe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CorsoEnaip2018_AspNetCoreTest1.Test", "CorsoEnaip2018_AspNetCoreTest1.Test\CorsoEnaip2018_AspNetCoreTest1.Test.csproj", "{B40183D0-A1E5-474C-B582-5EC581CF162B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CorsoEnaip2018_Reactive", "CorsoEnaip2018_Reactive\CorsoEnaip2018_Reactive.csproj", "{7F7648CE-28C4-462A-BA60-4457F94B9C34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CorsoEnaip2018_Reactive", "CorsoEnaip2018_Reactive\CorsoEnaip2018_Reactive.csproj", "{7F7648CE-28C4-462A-BA60-4457F94B9C34}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CorsoEnaip2018_Builder", "CorsoEnaip2018_Builder\CorsoEnaip2018_Builder.csproj", "{CF567719-7E96-4B78-B797-9825DCE2DC1D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CorsoEnaip2018_Builder", "CorsoEnaip2018_Builder\CorsoEnaip2018_Builder.csproj", "{CF567719-7E96-4B78-B797-9825DCE2DC1D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CorsoEnaip2018_FullObjects1", "CorsoEnaip2018_FullObjects1\CorsoEnaip2018_FullObjects1.csproj", "{F025678B-C0B3-4E67-B6E8-2AEBE0DE7DC3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CorsoEnaip2018_FullObjects1", "CorsoEnaip2018_FullObjects1\CorsoEnaip2018_FullObjects1.csproj", "{F025678B-C0B3-4E67-B6E8-2AEBE0DE7DC3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CorsoEnaip2018_State", "CorsoEnaip2018_State\CorsoEnaip2018_State.csproj", "{815CBFC4-F001-473B-8BF9-B8442ADE126C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CorsoEnaip2018_State", "CorsoEnaip2018_State\CorsoEnaip2018_State.csproj", "{815CBFC4-F001-473B-8BF9-B8442ADE126C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
